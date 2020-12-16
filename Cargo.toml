@@ -1,0 +1,15 @@
+[package]
+name = "quotes"
+version = "0.1.0"
+authors = ["zhaoyz <954241552@qq.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+async-std = { version = "1.8.0", features = ["attributes"] }
+surf = "2.1.0"
+isahc = "0.9.14"
+http-client = "6.2.0"
+chrono = "0.4"
+async-trait = "0.1.42"
