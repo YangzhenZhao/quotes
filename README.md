@@ -1,10 +1,22 @@
-### quotes
+<h1 align="center">quotes</h1>
+<div align="center">
+ <strong>
+   获取股票行情、股票列表等信息
+ </strong>
+</div>
+<div align="center">
+
+<a href="https://crates.io/crates/quotes">
+    <img src="https://img.shields.io/crates/v/quotes.svg?style=flat-square"
+    alt="Crates.io version" />
+</a>  
+<a href="https://docs.rs/quotes">
+    <img src="https://img.shields.io/badge/docs-latest-blue.svg?style=flat-square"
+    alt="docs.rs docs" />
+</a>   
+</div>
 
 
-[![Crates.io](https://img.shields.io/crates/v/quotes.svg)](https://crates.io/crates/quotes)
-[![Documentation](https://docs.rs/quotes/badge.svg)][documentation]   
-
-获取股票行情、股票列表等信息
 
 <a href="https://docs.rs/quotes/" target="_blank">Documentation</a>
 
