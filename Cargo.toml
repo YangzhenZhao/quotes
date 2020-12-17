@@ -9,6 +9,7 @@ edition = "2018"
 
 [dependencies]
 async-std = { version = "1.8.0", features = ["attributes"] }
+futures = "0.3.8"
 surf = "2.1.0"
 isahc = "0.9.14"
 http-client = "6.2.0"
@@ -18,3 +19,6 @@ calamine = "0.16.2"
 url = "2.1.1"
 futures-lite = "*"
 clap = "2.33.3"
+http = "0.2.2"
+serde = "1.0.118"
+serde_json = "1.0.59"

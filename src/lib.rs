@@ -6,5 +6,5 @@ mod tencent;
 mod utils;
 
 pub use sina::SinaQuote;
-pub use stock_list::stock_list_sz;
+pub use stock_list::{stock_list, stock_list_sh, stock_list_sz};
 pub use tencent::TencentQuote;
