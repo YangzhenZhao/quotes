@@ -1,6 +1,8 @@
 ### quotes
 
-[![Crates.io](https://img.shields.io/crates/v/quotes.svg)](https://crates.io/crates/quotes)    ![Documentation](https://docs.rs/quotes/badge.svg)   
+
+[![Crates.io](https://img.shields.io/crates/v/quotes.svg)](https://crates.io/crates/quotes)
+[![Documentation](https://docs.rs/quotes/badge.svg)][documentation]   
 
 获取股票行情、股票列表等信息
 
