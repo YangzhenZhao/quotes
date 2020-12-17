@@ -112,6 +112,4 @@ impl Quote for SinaQuote {
     }
 }
 
-impl SinaQuote {
-    
-}
+impl SinaQuote {}

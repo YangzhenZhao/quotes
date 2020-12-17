@@ -108,6 +108,4 @@ impl Quote for TencentQuote {
     }
 }
 
-impl TencentQuote {
-    
-}
+impl TencentQuote {}
