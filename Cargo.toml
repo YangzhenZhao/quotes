@@ -1,6 +1,6 @@
 [package]
 name = "quotes"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["zhaoyz <954241552@qq.com>"]
 description = "Request tick、stock_list msgs"
 repository = "https://github.com/YangzhenZhao/quotes"
