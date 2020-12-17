@@ -2,9 +2,11 @@
 name = "quotes"
 version = "0.1.0"
 authors = ["zhaoyz <954241552@qq.com>"]
+description = "Request tick、stock_list msgs"
 repository = "https://github.com/YangzhenZhao/quotes"
 edition = "2018"
 license = "MIT"
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
