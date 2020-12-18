@@ -26,7 +26,7 @@
 
 ```
 [dependencies]
-isahc = "0.1.1"
+quotes = "0.1.1"
 ```
 
 
