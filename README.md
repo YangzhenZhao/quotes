@@ -6,6 +6,7 @@
 </div>
 <div align="center">
 
+<img src="https://github.com/Yangzhenzhao/quotes/workflows/CI/badge.svg" />
 <a href="https://crates.io/crates/quotes">
     <img src="https://img.shields.io/crates/v/quotes.svg?style=flat-square"
     alt="Crates.io version" />
@@ -26,7 +27,7 @@
 
 ```
 [dependencies]
-quotes = "0.1.1"
+quotes = "0.1.2"
 ```
 
 

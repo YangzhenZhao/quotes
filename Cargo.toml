@@ -1,6 +1,6 @@
 [package]
 name = "quotes"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["zhaoyz <954241552@qq.com>"]
 description = "Request tick、stock_list msgs"
 repository = "https://github.com/YangzhenZhao/quotes"
@@ -12,7 +12,7 @@ documentation = "https://docs.rs/quotes/"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-async-std = { version = "1.8.0", features = ["attributes"] }
+async-std = "1.8.0"
 futures = "0.3.8"
 surf = "2.1.0"
 isahc = "0.9.14"
@@ -21,8 +21,6 @@ chrono = "0.4"
 async-trait = "0.1.42"
 calamine = "0.16.2"
 url = "2.1.1"
-futures-lite = "1.11.2"
-clap = "2.33.3"
 http = "0.2.2"
 serde = "1.0.118"
 serde_json = "1.0.59"

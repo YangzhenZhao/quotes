@@ -27,11 +27,10 @@ impl Quote for SinaQuote {
     }
 
     fn parse_out_tick(msg: &str) -> Option<Tick> {
-        let field_list: Vec<&str> = msg.split(",").collect();
+        let field_list: Vec<&str> = msg.split(',').collect();
         if field_list.len() < 30 {
             return None;
         }
-        println!("field_list = {:?}", field_list);
         let code_name_part: Vec<&str> = field_list[0].split(r#"=""#).collect();
         let name = code_name_part[1].to_string();
         let code = match code_name_part[0].get(code_name_part[0].len() - 6..) {
@@ -92,7 +91,6 @@ impl Quote for SinaQuote {
                 Err(_) => return None,
             };
         }
-        println!("{:?} {}", ask, time);
         Some(Tick {
             time,
             code,
@@ -111,5 +109,3 @@ impl Quote for SinaQuote {
         })
     }
 }
-
-impl SinaQuote {}

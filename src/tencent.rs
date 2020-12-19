@@ -27,7 +27,10 @@ impl Quote for TencentQuote {
     }
 
     fn parse_out_tick(msg: &str) -> Option<Tick> {
-        let field_list: Vec<&str> = msg.split("~").collect();
+        let field_list: Vec<&str> = msg.split('~').collect();
+        if field_list.len() < 30 {
+            return None;
+        }
         let time_str = match field_list[30].get(8..) {
             Some(s) => s,
             None => return None,
@@ -88,7 +91,6 @@ impl Quote for TencentQuote {
                 Err(_) => return None,
             };
         }
-        println!("{:?} {:?}", time, field_list[30]);
         Some(Tick {
             time,
             code,
@@ -107,5 +109,3 @@ impl Quote for TencentQuote {
         })
     }
 }
-
-impl TencentQuote {}

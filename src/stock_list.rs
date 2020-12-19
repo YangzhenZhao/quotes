@@ -1,6 +1,6 @@
 use calamine::{open_workbook, DataType, Reader, Xlsx};
 use futures::join;
-use futures_lite::io::AsyncReadExt;
+use futures::AsyncReadExt;
 use isahc::prelude::*;
 pub use serde::{Deserialize, Serialize};
 use std::fs;
@@ -12,53 +12,14 @@ const TMPFILENAME: &str = "tmp.xlsx";
 const CODECOLID: u32 = 4;
 
 #[derive(Deserialize, Serialize, Debug)]
+#[serde(rename_all = "UPPERCASE")]
 struct ShItem {
-    SECURITY_CODE_A: String,
+    security_code_a: String,
 }
 
 #[derive(Deserialize, Serialize, Debug)]
 struct ShResult {
     result: Vec<ShItem>,
-}
-
-pub async fn stock_list_sh_by_type(stock_type: &str) -> Result<Vec<String>, Error> {
-    let encoded: String = form_urlencoded::Serializer::new(String::new())
-        .append_pair("jsonCallBack", "jsonpCallback66942")
-        .append_pair("isPagination", "true")
-        .append_pair("stockCode", "")
-        .append_pair("csrcCode", "")
-        .append_pair("areaName", "")
-        .append_pair("stockType", stock_type)
-        .append_pair("pageHelp.cacheSize", "1")
-        .append_pair("pageHelp.beginPage", "1")
-        .append_pair("pageHelp.pageSize", "2000")
-        .append_pair("pageHelp.pageNo", "1")
-        .append_pair("pageHelp.endPage", "11")
-        .append_pair("_", "1589881387934")
-        .finish();
-    let url = format!(
-        "http://query.sse.com.cn/security/stock/getStockListData.do?{}",
-        encoded
-    );
-    let client = HttpClient::new()?;
-    let request = Request::get(url)
-        .header("Host", "query.sse.com.cn")
-        .header("Pragma", "no-cache")
-        .header("Referer", "http://www.sse.com.cn/assortment/stock/list/share/")
-        .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36")
-        .body("")?;
-    let mut response = client.send_async(request).await?;
-    let res_str = response.text()?;
-    let begin_pos = match res_str.find('{') {
-        None => return Err(Error::Msg("Responese text error!")),
-        Some(p) => p,
-    };
-    let res_str = match res_str.get(begin_pos..res_str.len() - 1) {
-        None => return Err(Error::Msg("Response text error!")),
-        Some(s) => s,
-    };
-    let res: ShResult = serde_json::from_str(res_str)?;
-    Ok(res.result.into_iter().map(|x| x.SECURITY_CODE_A).collect())
 }
 
 pub async fn stock_list() -> Result<Vec<String>, Error> {
@@ -106,4 +67,44 @@ pub async fn stock_list_sz() -> Result<Vec<String>, Error> {
         }
     }
     Ok(codes)
+}
+
+async fn stock_list_sh_by_type(stock_type: &str) -> Result<Vec<String>, Error> {
+    let encoded: String = form_urlencoded::Serializer::new(String::new())
+        .append_pair("jsonCallBack", "jsonpCallback66942")
+        .append_pair("isPagination", "true")
+        .append_pair("stockCode", "")
+        .append_pair("csrcCode", "")
+        .append_pair("areaName", "")
+        .append_pair("stockType", stock_type)
+        .append_pair("pageHelp.cacheSize", "1")
+        .append_pair("pageHelp.beginPage", "1")
+        .append_pair("pageHelp.pageSize", "2000")
+        .append_pair("pageHelp.pageNo", "1")
+        .append_pair("pageHelp.endPage", "11")
+        .append_pair("_", "1589881387934")
+        .finish();
+    let url = format!(
+        "http://query.sse.com.cn/security/stock/getStockListData.do?{}",
+        encoded
+    );
+    let client = HttpClient::new()?;
+    let request = Request::get(url)
+        .header("Host", "query.sse.com.cn")
+        .header("Pragma", "no-cache")
+        .header("Referer", "http://www.sse.com.cn/assortment/stock/list/share/")
+        .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36")
+        .body("")?;
+    let mut response = client.send_async(request).await?;
+    let res_str = response.text()?;
+    let begin_pos = match res_str.find('{') {
+        None => return Err(Error::Msg("Responese text error!")),
+        Some(p) => p,
+    };
+    let res_str = match res_str.get(begin_pos..res_str.len() - 1) {
+        None => return Err(Error::Msg("Response text error!")),
+        Some(s) => s,
+    };
+    let res: ShResult = serde_json::from_str(res_str)?;
+    Ok(res.result.into_iter().map(|x| x.security_code_a).collect())
 }

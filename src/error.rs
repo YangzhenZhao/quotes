@@ -1,3 +1,5 @@
+// #![deny(warnings)]
+
 #[derive(Debug)]
 pub enum Error {
     Io(std::io::Error),
@@ -7,6 +9,7 @@ pub enum Error {
     Http(http::Error),
     Msg(&'static str),
     SerdeJson(serde_json::Error),
+    Surf(surf::Error),
 }
 
 macro_rules! from_err {
@@ -25,6 +28,7 @@ from_err!(std::io::Error, Io);
 from_err!(calamine::Error, Calamine);
 from_err!(http::Error, Http);
 from_err!(serde_json::Error, SerdeJson);
+from_err!(surf::Error, Surf);
 
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -36,6 +40,7 @@ impl std::fmt::Display for Error {
             Error::Http(e) => write!(f, "Http error: {}", e),
             Error::Msg(s) => write!(f, "{}", s),
             Error::SerdeJson(s) => write!(f, "SerdeJson error: {}", s),
+            Error::Surf(s) => write!(f, "Surf error: {}", s),
         }
     }
 }
