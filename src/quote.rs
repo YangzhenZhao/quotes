@@ -27,7 +27,7 @@ pub struct Tick {
 
 #[async_trait]
 pub trait Quote {
-    fn new() -> Result<Self, isahc::Error>
+    fn new() -> Self
     where
         Self: Sized;
 

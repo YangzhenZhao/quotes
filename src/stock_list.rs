@@ -88,15 +88,15 @@ async fn stock_list_sh_by_type(stock_type: &str) -> Result<Vec<String>, Error> {
         "http://query.sse.com.cn/security/stock/getStockListData.do?{}",
         encoded
     );
-    let client = HttpClient::new()?;
-    let request = Request::get(url)
+    let client = isahc::HttpClient::new()?;
+    let request = isahc::Request::get(url)
         .header("Host", "query.sse.com.cn")
         .header("Pragma", "no-cache")
         .header("Referer", "http://www.sse.com.cn/assortment/stock/list/share/")
         .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36")
         .body("")?;
     let mut response = client.send_async(request).await?;
-    let res_str = response.text()?;
+    let res_str = response.text().await?;
     let begin_pos = match res_str.find('{') {
         None => return Err(Error::Msg("Responese text error!")),
         Some(p) => p,
